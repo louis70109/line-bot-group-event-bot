@@ -1,0 +1,19 @@
+{
+  "name": "line-bot-group-example",
+  "description": "LINE bot group example",
+  "repository": "https://github.com/louis70109/line-bot-group-example",
+  "keywords": [
+    "Line",
+    "flask",
+    "python",
+    "static"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-python.git"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
