@@ -64,10 +64,26 @@ class LineGroupController(Resource):
                         )]
                 )
 
-        elif line_type == 'room' and message == '對話群資訊':
-            count = line_bot_api.get_room_members_count(room_id=room)
-            text = f'對話群組人數為: {count}'
-            line_bot_api.reply_message(token, TextSendMessage(text=text))
+            line_bot_api.reply_message(token, TextSendMessage(text=message))
+
+        elif line_type == 'room':
+            if message == '聊天室資訊':
+                count = line_bot_api.get_room_members_count(room_id=room)
+                text = f'聊天室人數為: {count}'
+                line_bot_api.reply_message(token, TextSendMessage(text=text))
+            elif message == '我是誰':
+                profile = line_bot_api.get_room_member_profile(room_id=room, user_id=user)
+                text = f'你是➡️ {profile.display_name}\nID➡️ {profile.user_id}'
+                line_bot_api.reply_message(
+                    token, messages=[
+                        TextSendMessage(text=text),
+                        ImageSendMessage(
+                            original_content_url=profile.picture_url,
+                            preview_image_url=profile.picture_url,
+                        )]
+                )
+
+            line_bot_api.reply_message(token, TextSendMessage(text=message))
 
         else:
             line_bot_api.reply_message(token, TextSendMessage(text=message))
