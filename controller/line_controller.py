@@ -27,19 +27,42 @@ class LineGroupController(Resource):
         line_type = event['source'].get('type')
         group = event['source'].get('groupId')
         room = event['source'].get('roomId')
+        user = event['source'].get('userId')
 
-        if line_type == 'group' and message == '群組資訊':
-            count = line_bot_api.get_group_members_count(group_id=group)
-            summary = line_bot_api.get_group_summary(group_id=group)
-            text = f'群組名稱➡️ {summary.group_name}\n當前群組人數為➡️ {count}'
-            line_bot_api.reply_message(
-                token, messages=[
-                    TextSendMessage(text=text),
-                    ImageSendMessage(
-                        original_content_url=summary.picture_url,
-                        preview_image_url=summary.picture_url,
-                    )]
-            )
+        if message == '你走吧':
+            if line_type == 'group':
+                line_bot_api.reply_message(token, TextSendMessage(text='走了88'))
+                line_bot_api.leave_group(group_id=group)
+            elif line_type == 'room':
+                line_bot_api.reply_message(token, TextSendMessage(text='走了88'))
+                line_bot_api.leave_room(room_id=room)
+            else:
+                line_bot_api.reply_message(token, TextSendMessage(text='為什麼不是你走？'))
+
+        elif line_type == 'group':
+            if message == '群組資訊':
+                count = line_bot_api.get_group_members_count(group_id=group)
+                summary = line_bot_api.get_group_summary(group_id=group)
+                text = f'群組名稱➡️ {summary.group_name}\n當前群組人數為➡️ {count}'
+                line_bot_api.reply_message(
+                    token, messages=[
+                        TextSendMessage(text=text),
+                        ImageSendMessage(
+                            original_content_url=summary.picture_url,
+                            preview_image_url=summary.picture_url,
+                        )]
+                )
+            elif message == '我是誰':
+                profile = line_bot_api.get_group_member_profile(group_id=group, user_id=user)
+                text = f'你是➡️ {profile.display_name}\nID➡️ {profile.user_id}'
+                line_bot_api.reply_message(
+                    token, messages=[
+                        TextSendMessage(text=text),
+                        ImageSendMessage(
+                            original_content_url=profile.picture_url,
+                            preview_image_url=profile.picture_url,
+                        )]
+                )
 
         elif line_type == 'room' and message == '對話群資訊':
             count = line_bot_api.get_room_members_count(room_id=room)
