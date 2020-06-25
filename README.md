@@ -22,7 +22,7 @@ it just an echo same message. 🤖
 - 我是誰
 - 你走吧
 
-# Screen shot
+# Screenshot
 
 ![](https://i.imgur.com/4rMMe7Pm.png)
 
