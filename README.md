@@ -20,30 +20,37 @@ Make sure you already registered, if you need use LINE Bot.
     - Setup your basic account information. Here is some info you will need to know.
         - Callback URL: `https://{NGROK_URL}/webhooks/line`
         - Verify your webhook.
+        - Enable bot join group button.
 - You will get following info, need fill back to `.env` file.
     - Channel Secret
     - Channel Access Token (You need to issue one here)
 
 ## Normal testing
 
-1. first terminal window
+1. first terminal window:
 ```
 pip install -r requirements.txt --user
 python api.py
 ```
 
-2. Create a provisional Https:
+2. Created a provisional Https:
 
 ```
 ngrok http 5000
 ```
 
-or maybe you have npm enviroment:
+or maybe you have npm environment:
 
 ```
 npx ngrok http 5000
 ```
 ![](https://i.imgur.com/azVdG8j.png)
+
+3. Copied your ngrok url to LINE developer page and `Enabled` join group button:
+
+![](https://i.imgur.com/8jU9CMM.png)
+
+4. Joined bot in your `Group`/`Room`!
 
 # License
 
