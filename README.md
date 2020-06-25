@@ -1,11 +1,26 @@
 
 # LINE Bot Group API example
 
+This is a group/room demo bot, if you does not type a trigger word or it is not in group/room, 
+it just an echo same message. 🤖
 
 # Deployment
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+# Trigger word
+
+## Group
+
+- 群組資訊
+- 我是誰
+- 你走吧
+
+## Room
+
+- 聊天室資訊
+- 我是誰
+- 你走吧
 
 # Developer Side
 
