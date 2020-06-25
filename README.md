@@ -22,6 +22,18 @@ it just an echo same message. 🤖
 - 我是誰
 - 你走吧
 
+# Screen shot
+
+![](https://i.imgur.com/4rMMe7Pm.png)
+
+---
+
+![](https://i.imgur.com/fBGAqpmm.png)
+
+---
+
+![](https://i.imgur.com/jFipsAJm.png)
+
 # Developer Side
 
 ## LINE account
