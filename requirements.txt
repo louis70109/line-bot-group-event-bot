@@ -2,4 +2,4 @@ Flask
 Flask-RESTful
 gunicorn
 python-dotenv
-git+https://github.com/louis70109/line-bot-sdk-python.git@update-room-group-api
+git+https://github.com/line/line-bot-sdk-python.git@master
