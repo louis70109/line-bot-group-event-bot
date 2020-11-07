@@ -1,7 +1,7 @@
 {
-  "name": "line-bot-group-example",
+  "name": "line-group-bot",
   "description": "LINE bot group example",
-  "repository": "https://github.com/louis70109/line-bot-group-example",
+  "repository": "https://github.com/louis70109/line-group-bot",
   "keywords": [
     "Line",
     "flask",
