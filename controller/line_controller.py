@@ -8,11 +8,16 @@ from linebot import (
 )
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (
-    TextSendMessage, ImageSendMessage, VideoSendMessage, TextMessage, MessageEvent, JoinEvent, LeaveEvent
+    TextSendMessage, ImageSendMessage, VideoSendMessage, TextMessage, MessageEvent, JoinEvent, LeaveEvent, Sender
 )
 from linebot.models.events import UnsendEvent, VideoPlayCompleteEvent
 
 handler = WebhookHandler(os.getenv('LINE_CHANNEL_SECRET'))
+LINE_FRIEND = dict(
+    BROWN="https://stickershop.line-scdn.net/stickershop/v1/sticker/52002734/iPhone/sticker_key@2x.png",
+    CONY="https://stickershop.line-scdn.net/stickershop/v1/sticker/52002735/iPhone/sticker_key@2x.png",
+    SALLY="https://stickershop.line-scdn.net/stickershop/v1/sticker/52002736/iPhone/sticker_key@2x.png"
+)
 
 
 class LineGroupController(Resource):
@@ -97,7 +102,10 @@ class LineGroupController(Resource):
                 text = f'群組名稱➡️ {summary.group_name}\n當前群組人數為➡️ {count}'
                 line_bot_api.reply_message(
                     token, messages=[
-                        TextSendMessage(text=text),
+                        TextSendMessage(text=text,
+                                        sender=Sender(
+                                            name='CONY',
+                                            icon_url=LINE_FRIEND['CONY'])),
                         ImageSendMessage(
                             original_content_url=summary.picture_url,
                             preview_image_url=summary.picture_url,
@@ -108,7 +116,9 @@ class LineGroupController(Resource):
                 text = f'你是➡️ {profile.display_name}\nID➡️ {profile.user_id}'
                 line_bot_api.reply_message(
                     token, messages=[
-                        TextSendMessage(text=text),
+                        TextSendMessage(text=text, sender=Sender(
+                            name='BROWN',
+                            icon_url=LINE_FRIEND['BROWN'])),
                         ImageSendMessage(
                             original_content_url=profile.picture_url,
                             preview_image_url=profile.picture_url,
@@ -133,9 +143,8 @@ class LineGroupController(Resource):
                             preview_image_url=profile.picture_url,
                         )]
                 )
-            else:
-                message = '請邀請我進群組喔\n指令為: \n1. 我是誰\n2.群組資訊\n3. 你走吧\n3. 輸入 v1 降版'
         else:
+            message = '請邀請我進群組喔\n指令為: \n1. 我是誰\n2.群組資訊\n3. 你走吧\n3. 輸入 v1 降版'
             if message == 'video':
                 line_bot_api.reply_message(
                     token,
@@ -152,7 +161,12 @@ class LineGroupController(Resource):
                     message = '降版！'
             else:
                 message = '請邀請我進群組喔\n指令為: \n1. 我是誰\n2.群組資訊\n3. 你走吧\n3. 輸入 v1 降版'
-        line_bot_api.reply_message(token, TextSendMessage(text=message))
+        line_bot_api.reply_message(token, TextSendMessage(
+            text=message,
+            sender=Sender(
+                name='SALLY',
+                icon_url=LINE_FRIEND['SALLY'])
+        ))
 
         response = {
             "statusCode": 200,
