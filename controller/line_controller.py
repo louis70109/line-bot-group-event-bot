@@ -114,12 +114,6 @@ class LineGroupController(Resource):
                             preview_image_url=profile.picture_url,
                         )]
                 )
-            elif message == 'v1':
-                result = line_bot_api.set_webhook_endpoint(
-                    webhook_endpoint=f"{os.getenv('MY_DOMAIN')}/v1/webhooks/line"
-                )
-                if result == {}:
-                    message = '降版！'
             else:
                 message = '請邀請我進群組喔\n指令為: \n1. 我是誰\n2.群組資訊\n3. 你走吧\n3. 輸入 v1 降版'
 
@@ -139,12 +133,6 @@ class LineGroupController(Resource):
                             preview_image_url=profile.picture_url,
                         )]
                 )
-            elif message == 'v1':
-                result = line_bot_api.set_webhook_endpoint(
-                    webhook_endpoint=f"{os.getenv('MY_DOMAIN')}/v1/webhooks/line"
-                )
-                if result == {}:
-                    message = '降版！'
             else:
                 message = '請邀請我進群組喔\n指令為: \n1. 我是誰\n2.群組資訊\n3. 你走吧\n3. 輸入 v1 降版'
         else:
@@ -156,6 +144,12 @@ class LineGroupController(Resource):
                         preview_image_url='https://i.imgur.com/MW0Mpb6.jpg',
                         tracking_id='duck')
                 )
+            elif message == 'v1':
+                result = line_bot_api.set_webhook_endpoint(
+                    webhook_endpoint=f"{os.getenv('MY_DOMAIN')}/v1/webhooks/line"
+                )
+                if result == {}:
+                    message = '降版！'
             else:
                 message = '請邀請我進群組喔\n指令為: \n1. 我是誰\n2.群組資訊\n3. 你走吧\n3. 輸入 v1 降版'
         line_bot_api.reply_message(token, TextSendMessage(text=message))
