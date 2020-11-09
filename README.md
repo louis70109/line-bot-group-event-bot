@@ -1,8 +1,6 @@
+# LINE Bot Group API example(Unsend/Join/Leave), Chatroom(VideoComplete/Webhook)
 
-# LINE Bot Group API example
-
-This is a group/room demo bot, if you does not type a trigger word or it is not in group/room, 
-it just an echo same message. 🤖
+This is a group/room demo bot.
 
 ![](https://i.imgur.com/bBta70l.png)
 
@@ -10,19 +8,26 @@ it just an echo same message. 🤖
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-# Trigger word
+# Webhook API routing:
 
-## Group
+- Version 1 (just `echo` and `upgrade`): /v1/webhooks/line
+- Version 2: /v2/webhooks/line
 
-- 群組資訊
+# Trigger words
+
+## 在群組(Group)/聊天室(Room)
+
+- 群組資訊/聊天室資訊
 - 我是誰
 - 你走吧
 
-## Room
+> Nedd to invite chatbot into Group/Room.
 
-- 聊天室資訊
-- 我是誰
-- 你走吧
+## Chatroom
+
+- If `v1` version:
+  - Type `v2` to use webhook event migration.
+- Type `video` to receive video, when watch complete you would get a message(Video Completed Event).
 
 # Screenshot
 
@@ -40,23 +45,23 @@ it just an echo same message. 🤖
 
 ## LINE account
 
-- Got A LINE Bot API devloper account
-Make sure you already registered, if you need use LINE Bot.
-
+- Got A LINE Bot API developer account
+  Make sure you already registered, if you need use LINE Bot.
 
 - Go to LINE Developer Console
-    - Close auto-reply setting on "Messaging API" Tab.
-    - Setup your basic account information. Here is some info you will need to know.
-        - Callback URL: `https://{NGROK_URL}/webhooks/line`
-        - Verify your webhook.
-        - Enable bot join group button.
+  - Close auto-reply setting on "Messaging API" Tab.
+  - Setup your basic account information. Here is some info you will need to know.
+    - Callback URL: `https://{NGROK_URL}/v1/webhooks/line`
+    - Verify your webhook.
+    - Enable bot join group button.
 - You will get following info, need fill back to `.env` file.
-    - Channel Secret
-    - Channel Access Token (You need to issue one here)
+  - Channel Secret
+  - Channel Access Token (You need to issue one here)
 
-## Normal testing
+## Localhost
 
 1. first terminal window:
+
 ```
 pip install -r requirements.txt --user
 python api.py
@@ -73,9 +78,12 @@ or maybe you have npm environment:
 ```
 npx ngrok http 5000
 ```
+
 ![](https://i.imgur.com/azVdG8j.png)
 
-3. Copied your ngrok url to LINE developer page and `Enabled` join group button:
+3. Copied your ngrok url to:
+   - `.env` MY_DOMAIN environment property.
+   - LINE developer page and `Enabled` join group button:
 
 ![](https://i.imgur.com/8jU9CMM.png)
 
@@ -84,4 +92,3 @@ npx ngrok http 5000
 # License
 
 MIT License
-
