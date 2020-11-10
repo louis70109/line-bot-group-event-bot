@@ -2,7 +2,6 @@
 
 This is a group/room demo bot.
 
-![](https://i.imgur.com/bBta70l.png)
 
 # Deployment
 
